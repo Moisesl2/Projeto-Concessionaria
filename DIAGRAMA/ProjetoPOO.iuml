@@ -1,0 +1,67 @@
+@startuml "Concessionária"
+
+class Pessoa{
+    -nomeCompleto: String
+    -cpf: String
+    -idade: int
+    -endereco: String
+    -email: String
+}
+
+class Vendedor{
+    -comissao: double
+    +criarVendedor()
+    +lerVendedor()
+    +atualizarVendedor()
+    +excluirVendedor()
+    +calcularSalario()
+}
+class Cliente{
+    -comprovanteDeRenda: double
+    +criarCliente()
+    +lerCliente()
+    +atualizarCliente()
+    +excluirCliente()
+    +realizarPagamento()
+    +solicitarVeiculo()
+}
+
+class Veiculo{
+    -marca: String 
+    -modelo: String
+    -anoDeFabricacao:String 
+    -cor: String 
+    -estadoDoVeiculo: String
+    -quantidade:int
+    +criarVeiculo()
+    +lerVeiculo()
+    +atualizarVeiculo()
+    +excluirVeiculo()
+    +listarVeiculos()
+    +atualizarEstoque()
+}
+class Venda{
+    -status: boolean
+    -valor: double 
+    -data: String
+    -Veiculo veiculo
+    -Cliente cliente 
+    -Vendedor vendedor
+    +criarVenda()
+    +lerVenda()
+    +atualizarVenda()
+    +excluirVenda()
+    +listarVenda()
+    +criarSolicitacao() 
+    +listarSolicitacoesPententes()
+    +listarRegistroDeVendas()
+    +excluirSolicitacao()
+}
+Pessoa <|-- Vendedor
+Pessoa <|-- Cliente 
+
+Vendedor "1...*"--"1...*" Venda: realiza >
+Venda "1" -- "1...*" Veiculo: possui >
+Venda "1...*" -- "1...*" Cliente: possui >
+
+@enduml
