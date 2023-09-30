@@ -22,66 +22,60 @@ public class Veiculo{
     
     //Getters e Setters
     public String getMarca() {
-		return marca;
-	}
+    	return marca;
+    }
 
 
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
+    public void setMarca(String marca) {
+    	this.marca = marca;
+    }
 
 
-	public String getModelo() {
-		return modelo;
-	}
+    public String getModelo() {
+    	return modelo;
+    }
 
 
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
+    public void setModelo(String modelo) {
+    	this.modelo = modelo;
+    }
 
 
-	public int getAnoFabricacao() {
-		return anoFabricacao;
-	}
+    public int getAnoFabricacao() {
+    	return anoFabricacao;
+    }
 
 
-	public void setAnoFabricacao(int anoFabricacao) {
-		this.anoFabricacao = anoFabricacao;
-	}
+    public void setAnoFabricacao(int anoFabricacao) {
+    	this.anoFabricacao = anoFabricacao;
+    }
 
 
-	public String getCor() {
-		return cor;
-	}
+    public String getCor() {
+	return cor;
+    }
 
+    public void setCor(String cor) {
+    	this.cor = cor;
+    }
 
-	public void setCor(String cor) {
-		this.cor = cor;
-	}
+    public String getEstadoDoVeiculo() {
+    	return estadoDoVeiculo;
+    }
 
+    public void setEstadoDoVeiculo(String estadoDoVeiculo) {
+    	this.estadoDoVeiculo = estadoDoVeiculo;
+    }
 
-	public String getEstadoDoVeiculo() {
-		return estadoDoVeiculo;
-	}
+    public int getQuantidade() {
+    	return quantidade;
+    }
 
+    public void setQuantidade(int quantidade) {
+    	this.quantidade = quantidade;
+    }
 
-	public void setEstadoDoVeiculo(String estadoDoVeiculo) {
-		this.estadoDoVeiculo = estadoDoVeiculo;
-	}
-
-
-	public int getQuantidade() {
-		return quantidade;
-	}
-
-
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
-	}
-
-
-	// Método para criar um novo veículo
+    // Método para criar um novo veículo
     public static Veiculo criarVeiculo(String marca, String modelo, int anoFabricacao, String cor, String estadoDoVeiculo, int quantidade) {
         return new Veiculo(marca, modelo, anoFabricacao, cor, estadoDoVeiculo, quantidade);
     }
@@ -118,7 +112,6 @@ public class Veiculo{
         }
     }
 
-
     // Método para listar os detalhes do veículo
     public static void listarVeiculo(List<Veiculo> veiculos) {
         for (Veiculo veiculo : veiculos) {
@@ -132,10 +125,10 @@ public class Veiculo{
         this.quantidade += quantidade;
     }
 
-	@Override
-	public String toString() {
-		return "Veiculo [marca=" + marca + ", modelo=" + modelo + ", anoFabricacao=" + anoFabricacao + ", cor=" + cor
-				+ ", estadoDoVeiculo=" + estadoDoVeiculo + ", quantidade=" + quantidade + "]";
-	}
+    @Override
+    public String toString() {
+    	return "Veiculo [marca=" + marca + ", modelo=" + modelo + ", anoFabricacao=" + anoFabricacao + ", cor=" + cor
+		+ ", estadoDoVeiculo=" + estadoDoVeiculo + ", quantidade=" + quantidade + "]";
+    }
     
 }
