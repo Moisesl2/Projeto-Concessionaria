@@ -19,6 +19,7 @@ class Vendedor{
 class Cliente{
     -comprovanteDeRenda: double
     +criarCliente()
+    +consultarCliente() 
     +lerCliente()
     +atualizarCliente()
     +excluirCliente()
