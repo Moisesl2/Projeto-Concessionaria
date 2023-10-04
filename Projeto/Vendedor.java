@@ -1,11 +1,24 @@
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class Vendedor extends Pessoa {
+    private double salario;
     private double comissao;
-    public Vendedor(String nomeCompleto, String cpf, int idade, String endereco, String email, double comissao) {
+    
+    public Vendedor(String nomeCompleto, String cpf, int idade, String endereco, String email, double salario, double comissao) {
         super(nomeCompleto, cpf, idade, endereco, email);
+        this.salario = salario;
         this.comissao = comissao;
     }
+
+    public double getSalario() {
+        return salario;
+    }
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+    
     public double getComissao() {
         return comissao;
     }
@@ -13,56 +26,63 @@ public class Vendedor extends Pessoa {
         this.comissao = comissao;
     }
 
-    // public static Vendedor criarVendedor(String nomeCompleto, String cpf, int idade, String endereco, String email, double comissao) {
-    //     return new Vendedor(nomeCompleto, cpf, idade, endereco, email, comissao);
-    // }
-    public void criarVendedor() {
-        Scanner entrada = new Scanner(System.in);
+    // Metodos de criar, ler, atualizar e excluir
+    public static List<Vendedor> vendedor = new ArrayList<>();
 
-        System.out.println("Cadastro de Vendedor:");
-        System.out.print("Nome: ");
-        String nome = entrada.nextLine();
-        System.out.print("CPF: ");
-        String cpf = entrada.nextLine();
-        System.out.println("Idade: ");
-        int idade = entrada.nextInt();
-        System.out.println("Endereço: ");
-        String endereco = entrada.nextLine();
-        System.out.println("Email");
-        String email = entrada.nextLine();
-        System.out.println("Comissao: ");
-        double comissao = entrada.nextDouble();
-        System.out.println("Informações do Vendedor: \n Nome:" + nome + " CPF: " + cpf+ " Ideda: "+idade+" Endereço: " +endereco+ " Email: "+ email+ "Comissão: "+comissao);
-        
-    }
- 
-    public void lerVendedor() {
-        System.out.println("Informações do vendedor: ");
-        System.out.println("Nome: " + getNomeCompleto());
-        System.out.println("CPF: " + getCpf());
-        System.out.println("Idade: " + getIdade());
-        System.out.println("Endereço: " + getEndereco());
-        System.out.println("Email: " + getEmail());
-        System.out.println("Comissão: " + comissao);
+    public static void criarVendedor(String nomeCompleto, String cpf, int idade, String endereco, String email, double salario,double comissao){
+        Vendedor novoVendedor = new Vendedor( nomeCompleto, cpf, idade, endereco,  email,  salario, comissao);
+
+        vendedor.add(novoVendedor);
+        System.out.println("Vendedor criado com sucesso!");
     }
 
-    public void atualizarVendedor(String nomeCompleto, String cpf, int idade, String endereco, String email, double comissao) {
-        setNomeCompleto(nomeCompleto);
-        setCpf(cpf);
-        setIdade(idade);
-        setEndereco(endereco);
-        setEmail(email);
-        this.comissao = comissao;
-    }
-    public void excluirVendedor() {
-        System.out.println("Vendedor excluído: " + getNomeCompleto());
+    //vendedor vai ser procurado pelo CPF
+    // Vendedor encontrado, sair do loop
+    public static void lerVendedor(String cpf) {
+        for (Vendedor vendedor : vendedor) {
+            if (vendedor.getCpf().equals(cpf)) {
+                System.out.println("====== Informações do Vendedor: ======");
+                System.out.println("Nome: " + vendedor.getNomeCompleto());
+                System.out.println("CPF: " + vendedor.getCpf());
+                System.out.println("Endereço: " + vendedor.getEndereco());
+                System.out.println("E-mail: " + vendedor.getEmail());
+                return;
+            }
+        }
+        System.out.println("Vendedor não encontrado.");
     }
 
+    public static void atualizarVendedor(String cpf, String novoEndereco, String novoEmail) {
+        for (Vendedor vendedor : vendedor) {
+            if (vendedor.getCpf().equals(cpf)) {
+                vendedor.setEndereco(novoEndereco);
+                vendedor.setEmail(novoEmail);
+                System.out.println("Dados do vendedor atualizado com sucesso!");
+                return;
+            }
+        }
+        System.out.println("Vendedor não encontrado.");
+    }
+
+    public static void excluirVendedor(String cpf) {
+        Iterator<Vendedor> iterator = vendedor.iterator();
+        while (iterator.hasNext()) {
+            Vendedor vendedor = iterator.next();
+            if (vendedor.getCpf().equals(cpf)) {
+                iterator.remove();
+                System.out.println("Vendedor: "+vendedor.getNomeCompleto()+"excluído com sucesso!");
+                return;
+            }
+        }
+        System.out.println("Vendedor não encontrado.");
+    }
+    
     public double calcularSalario() {
         double salario;
         salario = + this.comissao;
         return salario;
     }
+
 
 }
 
