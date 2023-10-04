@@ -42,9 +42,9 @@ class Veiculo{
     +atualizarEstoque()
 }
 class Venda{
-    -status: boolean
+    -status: String
     -valor: double 
-    -data: String
+    -data: LocalDate
     -Veiculo veiculo
     -Cliente cliente 
     -Vendedor vendedor
@@ -53,7 +53,7 @@ class Venda{
     +atualizarVenda()
     +excluirVenda()
     +listarVenda()
-    +criarSolicitacao() 
+    +criarSolicitacao()
     +listarSolicitacoesPententes()
     +listarRegistroDeVendas()
     +excluirSolicitacao()

@@ -25,7 +25,12 @@ public class Veiculo {
         this.modelo = modelo;
     }
 
-    
+    // novo metodo criado
+    public boolean isVendido() {
+        return false;
+    }
+
+    //  ESTA É UMA CLASSE PROVISORIA
 
     
 
