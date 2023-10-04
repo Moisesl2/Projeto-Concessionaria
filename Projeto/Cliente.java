@@ -5,7 +5,7 @@ public class Cliente extends Pessoa{
     private double comprovanteDeRenda;
 
     public Cliente(String nomeCompleto, String cpf, int idade, String endereco, String email,
-            double comprovanteDeRenda) {
+        double comprovanteDeRenda) {
         super(nomeCompleto, cpf, idade, endereco, email);
         this.comprovanteDeRenda = comprovanteDeRenda;
     }

@@ -10,8 +10,10 @@ class Pessoa{
 
 class Vendedor{
     -comissao: double
+    -salario: double
     +criarVendedor()
     +lerVendedor()
+    +listarVendedor()
     +atualizarVendedor()
     +excluirVendedor()
     +calcularSalario()
