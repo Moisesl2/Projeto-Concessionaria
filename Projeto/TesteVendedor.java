@@ -31,9 +31,7 @@ public class TesteVendedor {
                     String email = entrada.nextLine();
                     System.out.println("Digite o salario do vendedor: ");
                     double salario = entrada.nextDouble();
-                    System.out.println("Digite a comissão do vendedor: ");
-                    double comissao = entrada.nextDouble();
-                    Vendedor.criarVendedor(nomeCompleto, cpf, idade, endereco,  email, salario, comissao);
+                    Vendedor.criarVendedor(nomeCompleto, cpf, idade, endereco,  email, salario);
                     break;
                 case 2:
                     System.out.print("Digite o CPF do vendedor a ser lido: ");

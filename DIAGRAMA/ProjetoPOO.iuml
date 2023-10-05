@@ -9,6 +9,7 @@ class Pessoa{
 }
 
 class Vendedor{
+    -salario: double
     -comissao: double
     +criarVendedor()
     +lerVendedor()
@@ -17,7 +18,7 @@ class Vendedor{
     +calcularSalario()
 }
 class Cliente{
-    -comprovanteDeRenda: double
+    -comprovanteDeRenda: Renda
     +criarCliente()
     +lerCliente()
     +atualizarCliente()
@@ -29,7 +30,7 @@ class Cliente{
 class Veiculo{
     -marca: String 
     -modelo: String
-    -anoDeFabricacao:String 
+    -anoDeFabricacao:int 
     -cor: String 
     -estadoDoVeiculo: String
     -quantidade:int
@@ -41,12 +42,12 @@ class Veiculo{
     +atualizarEstoque()
 }
 class Venda{
-    -status: boolean
+    -status: String
     -valor: double 
     -data: String
-    -Veiculo veiculo
-    -Cliente cliente 
-    -Vendedor vendedor
+    -veiculo: Veiculo
+    -cliente: Cliente
+    -vendedor: Vendedor
     +criarVenda()
     +lerVenda()
     +atualizarVenda()
@@ -60,8 +61,8 @@ class Venda{
 Pessoa <|-- Vendedor
 Pessoa <|-- Cliente 
 
-Vendedor "1...*"--"1...*" Venda: realiza >
-Venda "1" -- "1...*" Veiculo: possui >
-Venda "1...*" -- "1...*" Cliente: possui >
+Vendedor "1"--"0...*" Venda: realiza >
+Venda "0...*" -- "1...*" Veiculo: possui >
+Venda "0...*" -- "1" Cliente: possui >
 
 @enduml

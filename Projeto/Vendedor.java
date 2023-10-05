@@ -6,10 +6,10 @@ public class Vendedor extends Pessoa {
     private double salario;
     private double comissao;
     
-    public Vendedor(String nomeCompleto, String cpf, int idade, String endereco, String email, double salario, double comissao) {
+    public Vendedor(String nomeCompleto, String cpf, int idade, String endereco, String email, double salario) {
         super(nomeCompleto, cpf, idade, endereco, email);
         this.salario = salario;
-        this.comissao = comissao;
+        this.comissao = 0 ;
     }
 
     public double getSalario() {
@@ -29,8 +29,8 @@ public class Vendedor extends Pessoa {
     // Metodos de criar, ler, atualizar e excluir
     public static List<Vendedor> vendedor = new ArrayList<>();
 
-    public static void criarVendedor(String nomeCompleto, String cpf, int idade, String endereco, String email, double salario,double comissao){
-        Vendedor novoVendedor = new Vendedor( nomeCompleto, cpf, idade, endereco,  email,  salario, comissao);
+    public static void criarVendedor(String nomeCompleto, String cpf, int idade, String endereco, String email, double salario){
+        Vendedor novoVendedor = new Vendedor( nomeCompleto, cpf, idade, endereco,  email,  salario);
 
         vendedor.add(novoVendedor);
         System.out.println("Vendedor criado com sucesso!");
@@ -61,7 +61,7 @@ public class Vendedor extends Pessoa {
                 return;
             }
         }
-        System.out.println("Vendedor não encontrado.");
+        System.out.println("Vendedor não encontrado!");
     }
 
     public static void excluirVendedor(String cpf) {
@@ -70,11 +70,11 @@ public class Vendedor extends Pessoa {
             Vendedor vendedor = iterator.next();
             if (vendedor.getCpf().equals(cpf)) {
                 iterator.remove();
-                System.out.println("Vendedor: "+vendedor.getNomeCompleto()+"excluído com sucesso!");
+                System.out.println("Vendedor: "+vendedor.getNomeCompleto()+", excluído com sucesso!");
                 return;
             }
         }
-        System.out.println("Vendedor não encontrado.");
+        System.out.println("Vendedor não encontrado¹");
     }
     
     public double calcularSalario() {
