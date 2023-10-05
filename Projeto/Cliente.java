@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Scanner;
 public class Cliente extends Pessoa{
-	 private double comprovanteDeRenda;
+	   private double comprovanteDeRenda;
 
 	    public Cliente(String nomeCompleto, String cpf, int idade, String endereco, String email,
 	        double comprovanteDeRenda) {
@@ -34,10 +34,9 @@ public class Cliente extends Pessoa{
 	        return null;
 	    }
 
-		@Override
-		public String toString() {
-			return  super.toString()+
-					"Cliente [comprovanteDeRenda=" + comprovanteDeRenda + "]";
-		}
+	    @Override
+	    public String toString() {
+	    	return  super.toString()+ "Cliente [comprovanteDeRenda=" + comprovanteDeRenda + "]";
+	    }
 	    
 }
