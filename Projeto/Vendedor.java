@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 public class Vendedor extends Pessoa{
-	    private double salario;
+private double salario;
 	    private double comissao;
 	    
 	    public Vendedor(String nomeCompleto, String cpf, int idade, String endereco, String email, double salario) {
