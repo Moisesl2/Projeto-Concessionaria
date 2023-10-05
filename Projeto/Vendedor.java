@@ -76,8 +76,8 @@ public class Vendedor extends Pessoa{
 	        System.out.println("Vendedor não encontrado¹");
 	    }
 
-		@Override
-		public String toString() {
-			return toString()+ "Vendedor [salario=" + salario + ", comissao=" + comissao + "]";
-		}
+	    @Override
+	    public String toString() {
+	    	return toString()+ "Vendedor [salario=" + salario + ", comissao=" + comissao + "]";
+	    }
 }
