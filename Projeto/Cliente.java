@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Scanner;
 public class Cliente extends Pessoa{
-	   private double comprovanteDeRenda;
+	    private double comprovanteDeRenda;
 
 	    public Cliente(String nomeCompleto, String cpf, int idade, String endereco, String email,
 	        double comprovanteDeRenda) {
