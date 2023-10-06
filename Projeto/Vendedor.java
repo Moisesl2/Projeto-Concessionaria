@@ -77,10 +77,8 @@ public class Vendedor extends Pessoa {
         System.out.println("Vendedor não encontrado¹");
     }
     
-    public double calcularSalario() {
-        double salario;
-        salario = + this.comissao;
-        return salario;
+    public static double calcularSalario(double salario, double comissao) {
+        return salario +(salario * ( comissao / 100));
     }
 
 
