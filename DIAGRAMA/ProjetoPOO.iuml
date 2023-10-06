@@ -27,6 +27,7 @@ class Cliente{
 }
 
 class Veiculo{
+    -codigo: int
     -marca: String 
     -modelo: String
     -anoDeFabricacao:String 
