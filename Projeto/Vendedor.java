@@ -39,7 +39,7 @@ public class Vendedor extends Pessoa {
         return vendedores;
     }
 
-    public static Vendedor buscaVendedor(String cpf){
+    public static Vendedor consultarVendedor(String cpf){
         for (Vendedor vendedor : vendedores) {
             if (vendedor.getCpf().equals(cpf)) {
                 return vendedor;
@@ -67,7 +67,7 @@ public class Vendedor extends Pessoa {
         System.out.print("Digite o CPF do vendedor que deseja ler: ");
         String cpf = scanner.nextLine();
 
-        Vendedor vendedor = buscaVendedor(cpf);
+        Vendedor vendedor = consultarVendedor(cpf);
 
         if (vendedor != null) {
             System.out.println("\nInformações do Vendedor:");

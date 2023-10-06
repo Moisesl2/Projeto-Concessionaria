@@ -13,14 +13,16 @@ class Vendedor{
     -salario: double
     +criarVendedor()
     +lerVendedor()
+    +consultarVendedor()
     +listarVendedor()
     +atualizarVendedor()
     +excluirVendedor()
     +calcularSalario()
 }
 class Cliente{
-    -comprovanteDeRenda: double
+    -renda: double
     +criarCliente()
+    +listarCliente()
     +consultarCliente() 
     +lerCliente()
     +atualizarCliente()
@@ -54,7 +56,6 @@ class Venda{
     +lerVenda()
     +atualizarVenda()
     +excluirVenda()
-    +listarVenda()
     +criarSolicitacao()
     +listarSolicitacoesPententes()
     +listarRegistroDeVendas()
