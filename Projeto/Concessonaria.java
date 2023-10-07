@@ -178,4 +178,144 @@ public class Concessonaria {
             
         } while (op2 != 9);
     }
+
+    //Menu Veiculo
+    public static void menuVeiculo() {
+		    List<Veiculo> veiculos = new ArrayList<>();
+		    Scanner ent4 = new Scanner(System.in);
+		    int op3;
+
+		    do {
+		        System.out.println("\n-------- MENU DE VEÍCULOS --------");
+		        System.out.println("1. Criar Veículo ");
+		        System.out.println("2. Listar Veículos ");
+		        System.out.println("3. Ler Veículo ");
+		        System.out.println("4. Atualizar Veículo ");
+		        System.out.println("5. Excluir Veículo ");
+		        System.out.println("6. Atualizar Estoque ");
+		        System.out.println("7. Sair ");
+		        op3 = ent4.nextInt();
+
+		        switch (op3) {
+		            case 1:
+		                criarVeiculo(veiculos);
+		                break;
+
+		            case 2:
+		                listarVeiculo(veiculos);
+		                break;
+
+		            case 3:
+		                lerVeiculo(veiculos);
+		                break;
+
+		            case 4:
+		                atualizarVeiculo(veiculos);
+		                break;
+
+		            case 5:
+		                excluirVeiculo(veiculos);
+		                break;
+
+		            case 6:
+		                atualizarEstoque(veiculos);
+		                break;
+
+		            case 7:
+		                System.out.println("Saindo...");
+		                break;
+
+		            default:
+		                System.out.println("Opção inválida!");
+		                break;
+		        }
+		    } while (op3 != 7);
+		}
+
+		public static void criarVeiculo(List<Veiculo> veiculos) {
+		    Scanner ent = new Scanner(System.in);
+		    System.out.println("Digite a marca do veículo: ");
+		    String marca = ent.nextLine();
+		    System.out.println("Digite o modelo do veículo: ");
+		    String modelo = ent.nextLine();
+		    System.out.println("Digite o ano de fabricação do veículo: ");
+		    int anoFabricacao = ent.nextInt();
+		    ent.nextLine(); // Consumir a quebra de linha
+		    System.out.println("Digite a cor do veículo: ");
+		    String cor = ent.nextLine();
+		    System.out.println("Digite o estado do veículo: ");
+		    String estadoDoVeiculo = ent.nextLine();
+		    System.out.println("Digite a quantidade em estoque: ");
+		    int quantidade = ent.nextInt();
+
+		    Veiculo veiculo = Veiculo.criarVeiculo(marca, modelo, anoFabricacao, cor, estadoDoVeiculo, quantidade);
+		    veiculos.add(veiculo);
+		    System.out.println("Veículo criado com sucesso!");
+		    ent.close();
+		}
+
+		public static void listarVeiculo(List<Veiculo> veiculos) {
+		    Veiculo.listarVeiculo(veiculos);
+		}
+
+		public static void lerVeiculo(List<Veiculo> veiculos) {
+		    Scanner ent = new Scanner(System.in);
+		    System.out.println("Digite a marca do veículo: ");
+		    String marca = ent.nextLine();
+		    System.out.println("Digite o modelo do veículo: ");
+		    String modelo = ent.nextLine();
+
+		    for (Veiculo veiculo : veiculos) {
+		        if (veiculo.getMarca().equals(marca) && veiculo.getModelo().equals(modelo)) {
+		            veiculo.lerVeiculo();
+		            return;
+		        }
+		    }
+		    System.out.println("Veículo não encontrado.");
+		}
+
+		public static void atualizarVeiculo(List<Veiculo> veiculos) {
+		    Scanner ent = new Scanner(System.in);
+		    System.out.println("Digite a marca do veículo que deseja atualizar: ");
+		    String marca = ent.nextLine();
+		    System.out.println("Digite o modelo do veículo que deseja atualizar: ");
+		    String modelo = ent.nextLine();
+
+		    for (Veiculo veiculo : veiculos) {
+		        if (veiculo.getMarca().equals(marca) && veiculo.getModelo().equals(modelo)) {
+		            System.out.println("Digite a nova marca do veículo: ");
+		            marca = ent.nextLine();
+		            System.out.println("Digite o novo modelo do veículo: ");
+		            modelo = ent.nextLine();
+		            System.out.println("Digite o novo ano de fabricação do veículo: ");
+		            int anoFabricacao = ent.nextInt();
+		            ent.nextLine(); // Consumir a quebra de linha
+		            System.out.println("Digite a nova cor do veículo: ");
+		            String cor = ent.nextLine();
+		            System.out.println("Digite o novo estado do veículo: ");
+		            String estadoDoVeiculo = ent.nextLine();
+		            System.out.println("Digite a nova quantidade em estoque: ");
+		            int quantidade = ent.nextInt();
+
+		            veiculo.atualizarVeiculo(marca, modelo, anoFabricacao, cor, estadoDoVeiculo, quantidade);
+		            System.out.println("Veículo atualizado com sucesso!");
+		            return;
+		        }
+		    }
+		    System.out.println("Veículo não encontrado.");
+		}
+
+		public static void excluirVeiculo(List<Veiculo> veiculos) {
+		    Scanner ent = new Scanner(System.in);
+		    System.out.println("Digite a marca do veículo que deseja excluir: ");
+		    String marca = ent.nextLine();
+		    System.out.println("Digite o modelo do veículo que deseja excluir: ");
+		    String modelo = ent.nextLine();
+
+		    Veiculo.excluirVeiculo(veiculos, marca, modelo);
+		}
+
+
+	}
+
 }
