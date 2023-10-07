@@ -20,6 +20,8 @@ class Vendedor{
 class Cliente{
     -renda:double
     +criarCliente()
+    +listarCliente()
+    +consultarCliente()
     +lerCliente()
     +atualizarCliente()
     +excluirCliente()
@@ -44,7 +46,7 @@ class Veiculo{
 class Venda{
     -status: String
     -valor: double 
-    -data: String
+    -data: LocalDate
     -veiculo: Veiculo
     -cliente: Cliente
     -vendedor: Vendedor

@@ -69,7 +69,7 @@ public class TesteVendedor {
                     break;
             }
 
-        } while (escolha != 5);
+        } while (escolha != 6);
 
         entrada.close();    
     }
