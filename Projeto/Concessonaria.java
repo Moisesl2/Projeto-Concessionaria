@@ -10,6 +10,7 @@ public class Concessonaria {
             System.out.println(" \n------ MENU PRINCIPAL ------ ");
             System.out.println("1. MENU DO CLIENTE ");
             System.out.println("2. MENU DAS VENDAS ");
+	    System.out.println("3. MENU DE VEÍCULO");
             System.out.println(" Sair");
             opcao = ent.nextInt();
 
@@ -21,8 +22,10 @@ public class Concessonaria {
                 case 2:
                     menuVenda();
                     break;
-
                 case 3:
+                    menuVeiculo();
+                    break;
+                case 4:
                     System.out.println("Saindo...");
 
                 default:
@@ -31,7 +34,7 @@ public class Concessonaria {
                     break;
             }
 
-        }while (opcao != 3);
+        }while (opcao != 4);
 
             
         
@@ -181,24 +184,24 @@ public class Concessonaria {
 
     //Menu Veiculo
     public static void menuVeiculo() {
-		    List<Veiculo> veiculos = new ArrayList<>();
-		    Scanner ent4 = new Scanner(System.in);
-		    int op3;
+	List<Veiculo> veiculos = new ArrayList<>();
+        Scanner ent4 = new Scanner(System.in);
+	int op3;
 
-		    do {
-		        System.out.println("\n-------- MENU DE VEÍCULOS --------");
-		        System.out.println("1. Criar Veículo ");
-		        System.out.println("2. Listar Veículos ");
-		        System.out.println("3. Ler Veículo ");
-		        System.out.println("4. Atualizar Veículo ");
-		        System.out.println("5. Excluir Veículo ");
-		        System.out.println("6. Atualizar Estoque ");
-		        System.out.println("7. Sair ");
-		        op3 = ent4.nextInt();
+	do {
+		System.out.println("\n-------- MENU DE VEÍCULOS --------");
+		System.out.println("1. Criar Veículo ");
+		System.out.println("2. Listar Veículos ");
+		System.out.println("3. Ler Veículo ");
+		System.out.println("4. Atualizar Veículo ");
+		System.out.println("5. Excluir Veículo ");
+		System.out.println("6. Atualizar Estoque ");
+		System.out.println("7. Sair ");
+		op3 = ent4.nextInt();
 
-		        switch (op3) {
-		            case 1:
-		                criarVeiculo(veiculos);
+		switch (op3) {
+			case 1:
+		            criarVeiculo(veiculos);
 		                break;
 
 		            case 2:
@@ -314,8 +317,5 @@ public class Concessonaria {
 
 		    Veiculo.excluirVeiculo(veiculos, marca, modelo);
 		}
-
-
 	}
-
 }
