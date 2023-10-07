@@ -1,9 +1,12 @@
 import java.util.Scanner;
 
 public class TesteVendedor {
+
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
         int escolha;
+
+        Vendedor.lerDados("vendedores.txt");
 
         do {
             System.out.println("\n====== Menu de Opções: ======");
@@ -22,17 +25,25 @@ public class TesteVendedor {
                 case 1:
                     System.out.print("Digite o nome do vendedor: ");
                     String nomeCompleto = entrada.nextLine();
+
                     System.out.print("Digite o CPF do vendedor: ");
                     String cpf = entrada.nextLine();
-                    System.out.println("Digite a idade do vendedor: ");
+
+                    System.out.print("Digite a idade do vendedor: ");
                     int idade = entrada.nextInt();
+                    entrada.nextLine(); 
+
                     System.out.println("Digite o endereço do vendedor: ");
                     String endereco = entrada.nextLine();
-                    System.out.println("Digite o e-mail do vendedor: ");
+
+                    System.out.print("Digite o e-mail do vendedor: ");
                     String email = entrada.nextLine();
-                    System.out.println("Digite o salario do vendedor: ");
+
+                    System.out.print("Digite o salario do vendedor: ");
                     double salario = entrada.nextDouble();
+
                     Vendedor.criarVendedor(nomeCompleto, cpf, idade, endereco, email, salario);
+
                     break;
                 case 2:
                     System.out.println("Digite o CPF do vendedor a ser lido: ");
@@ -68,9 +79,9 @@ public class TesteVendedor {
                     System.out.println("Opção inválida! Tente novamente...");
                     break;
             }
+            Vendedor.salvarDados("vendedores.txt");
 
-        } while (escolha != 6);
-
+        } while (escolha != 5);
         entrada.close();    
     }
 }

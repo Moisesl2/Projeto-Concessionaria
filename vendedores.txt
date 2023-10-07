@@ -1,0 +1,7 @@
+Nome Compelto: Paulo Melo Costa 
+CPF: 0987654-20
+Idade: 33
+Endereco: Riacho de Santana - Sona Rural 
+Email: paulomelo43@gmail.com
+Salario:1350.0
+
