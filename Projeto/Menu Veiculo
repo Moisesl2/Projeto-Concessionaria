@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.Scanner;
 public class PrincipalVeiculo {
 	public static void main(String[] args) {
-        String nomeArquivo = "C:\\Users\\Adm\\OneDrive\\Área de Trabalho\\veiculo.txt"; // Nome do arquivo onde os veículos serão armazenados
+        String nomeArquivo = "veiculo.txt"; 
         List<Veiculo> veiculos = Veiculo.lerVeiculosEmArquivo(nomeArquivo);
         Scanner scanner = new Scanner(System.in);
 
