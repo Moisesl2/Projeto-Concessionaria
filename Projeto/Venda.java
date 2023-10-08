@@ -337,7 +337,7 @@ public class Venda{
             while((linha = bufferedrReader.readLine())!= null){
                 String[] dados = linha.split(";");
 
-                if (dados.length >= 18) {
+                if (dados.length >= 13) {
                     String nomeCompleto = dados[0].trim();
                     String cpf = dados[1].trim();
                     int idade =Integer.parseInt(dados[2].trim());
