@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 public class Veiculo {
-   private String marca;
+    private String marca;
     private String modelo;
     private int anoDeFabricacao;
     private String cor;
