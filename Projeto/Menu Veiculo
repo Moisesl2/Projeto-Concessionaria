@@ -1,133 +1,157 @@
-public static void menuVeiculo() {
-    List<Veiculo> veiculos = new ArrayList<>();
-    Scanner ent4 = new Scanner(System.in);
-    int op3;
+import java.util.List; 
+import java.util.Scanner;
+public class PrincipalVeiculo {
+	public static void main(String[] args) {
+        String nomeArquivo = "C:\\Users\\Adm\\OneDrive\\Área de Trabalho\\veiculo.txt"; // Nome do arquivo onde os veículos serão armazenados
+        List<Veiculo> veiculos = Veiculo.lerVeiculosEmArquivo(nomeArquivo);
+        Scanner scanner = new Scanner(System.in);
 
-    do {
-        System.out.println("\n-------- MENU DE VEÍCULOS --------");
-        System.out.println("1. Criar Veículo ");
-        System.out.println("2. Listar Veículos ");
-        System.out.println("3. Ler Veículo ");
-        System.out.println("4. Atualizar Veículo ");
-        System.out.println("5. Excluir Veículo ");
-        System.out.println("6. Atualizar Estoque ");
-        System.out.println("7. Sair ");
-        op3 = ent4.nextInt();
+        while (true) {
+        	System.out.println(" +------------- MENU DE VEÍCULOS ---------------+");
+            System.out.println(" | Selecione uma das opções abaixo:             |");
+            System.out.println(" | 1. Criar um  veículo                         |");
+            System.out.println(" | 2. Ler veículo em arquivo                    |");
+            System.out.println(" | 3. Atualizar/editar veículo em arquivo       |");
+            System.out.println(" | 4. Excluir um veículo                        |");
+            System.out.println(" | 5. Listar os veículos                        |");
+            System.out.println(" | 6. Mostrar estoque de um veículo atualizado  |");
+            System.out.println(" | 7. Salvar em arquivo                         |");
+            System.out.println(" | 8. Sair                                      |");
+            System.out.println(" |             Escolha uma opção:               |");
+            System.out.println(" +----------------------------------------------+");
+            System.out.println();
 
-        switch (op3) {
-            case 1:
-                criarVeiculo(veiculos);
-                break;
+            int opcao = scanner.nextInt();
+            scanner.nextLine(); // Consumir a nova linha
 
-            case 2:
-                listarVeiculo(veiculos);
-                break;
+            switch (opcao) {
+                case 1:
+                    System.out.println("Criar um veículo:");
+                    System.out.print("Marca: ");
+                    String marca = scanner.nextLine();
+                    System.out.print("Modelo: ");
+                    String modelo = scanner.nextLine();
+                    System.out.print("Ano de Fabricação: ");
+                    int anoDeFabricacao = scanner.nextInt();
+                    scanner.nextLine(); // Consumir a nova linha
+                    System.out.print("Cor: ");
+                    String cor = scanner.nextLine();
+                    System.out.print("Estado do Veículo: ");
+                    String estadoDoVeiculo = scanner.nextLine();
+                    System.out.print("Quantidade em Estoque: ");
+                    int quantidade = scanner.nextInt();
+                    scanner.nextLine(); // Consumir a nova linha
 
-            case 3:
-                lerVeiculo(veiculos);
-                break;
+                    Veiculo.criarVeiculoEmArquivo(marca, modelo, anoDeFabricacao, cor, estadoDoVeiculo, quantidade, nomeArquivo);
+                    break;
+                case 2:
+                    System.out.println("Ler veículo em arquivo:");
+                    System.out.print("Marca do veículo: ");
+                    marca = scanner.nextLine();
+                    System.out.print("Modelo do veículo: ");
+                    modelo = scanner.nextLine();
 
-            case 4:
-                atualizarVeiculo(veiculos);
-                break;
+                    // Buscar e exibir o veículo em arquivo
+                    Veiculo veiculoLido = buscarVeiculoEmArquivo(marca, modelo, nomeArquivo);
+                    if (veiculoLido != null) {
+                        veiculoLido.lerVeiculo();
+                    } else {
+                        System.out.println("Veículo não encontrado.");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Atualizar veículo em arquivo:");
+                    System.out.print("Marca do veículo a ser atualizado: ");
+                    marca = scanner.nextLine();
+                    System.out.print("Modelo do veículo a ser atualizado: ");
+                    modelo = scanner.nextLine();
 
-            case 5:
-                excluirVeiculo(veiculos);
-                break;
+                    Veiculo veiculoAtualizar = buscarVeiculoEmArquivo(marca, modelo, nomeArquivo);
+                    if (veiculoAtualizar != null) {
+                        // Solicitar as atualizações dos campos
+                        System.out.print("Nova Marca: ");
+                        marca = scanner.nextLine();
+                        System.out.print("Novo Modelo: ");
+                        modelo = scanner.nextLine();
+                        System.out.print("Novo Ano de Fabricação: ");
+                        anoDeFabricacao = scanner.nextInt();
+                        scanner.nextLine(); // Consumir a nova linha
+                        System.out.print("Nova Cor: ");
+                        cor = scanner.nextLine();
+                        System.out.print("Novo Estado do Veículo: ");
+                        estadoDoVeiculo = scanner.nextLine();
+                        System.out.print("Nova Quantidade em Estoque: ");
+                        quantidade = scanner.nextInt();
+                        scanner.nextLine(); // Consumir a nova linha
 
-            case 6:
-                atualizarEstoque(veiculos);
-                break;
+                        // Atualizar o veículo
+                        veiculoAtualizar.setMarca(marca);
+                        veiculoAtualizar.setModelo(modelo);
+                        veiculoAtualizar.setAnoDeFabricacao(anoDeFabricacao);
+                        veiculoAtualizar.setCor(cor);
+                        veiculoAtualizar.setEstadoDoVeiculo(estadoDoVeiculo);
+                        veiculoAtualizar.setQuantidade(quantidade);
 
-            case 7:
-                System.out.println("Saindo...");
-                break;
+                        // Atualizar no arquivo
+                        veiculoAtualizar.atualizarVeiculoEmArquivo(nomeArquivo);
+                    } else {
+                        System.out.println("Veículo não encontrado.");
+                    }
+                    break;
+                case 4:
+                    System.out.println("Excluir um veículo:");
+                    System.out.print("Marca do veículo a ser excluído: ");
+                    marca = scanner.nextLine();
+                    System.out.print("Modelo do veículo a ser excluído: ");
+                    modelo = scanner.nextLine();
 
-            default:
-                System.out.println("Opção inválida!");
-                break;
-        }
-    } while (op3 != 7);
-}
+                    Veiculo.excluirVeiculoEmArquivo(marca, modelo, nomeArquivo);
+                    break;
+                case 5:
+                    System.out.println("Listar veículos:");
+                    Veiculo.listarVeiculosEmArquivo(nomeArquivo);
+                    Veiculo.imprimirVeiculosEmTabela(veiculos);
+                    break;
+                case 6:
+                    System.out.println("Atualizar estoque de um veículo:");
+                    System.out.print("Marca do veículo a ser atualizado: ");
+                    marca = scanner.nextLine();
+                    System.out.print("Modelo do veículo a ser atualizado: ");
+                    modelo = scanner.nextLine();
+                    System.out.print("Quantidade a ser adicionada/subtraída: ");
+                    int quantidadeAtualizacao = scanner.nextInt();
+                    scanner.nextLine(); // Consumir a nova linha
 
-public static void criarVeiculo(List<Veiculo> veiculos) {
-    Scanner ent = new Scanner(System.in);
-    System.out.println("Digite a marca do veículo: ");
-    String marca = ent.nextLine();
-    System.out.println("Digite o modelo do veículo: ");
-    String modelo = ent.nextLine();
-    System.out.println("Digite o ano de fabricação do veículo: ");
-    int anoFabricacao = ent.nextInt();
-    ent.nextLine(); // Consumir a quebra de linha
-    System.out.println("Digite a cor do veículo: ");
-    String cor = ent.nextLine();
-    System.out.println("Digite o estado do veículo: ");
-    String estadoDoVeiculo = ent.nextLine();
-    System.out.println("Digite a quantidade em estoque: ");
-    int quantidade = ent.nextInt();
-
-    Veiculo veiculo = Veiculo.criarVeiculo(marca, modelo, anoFabricacao, cor, estadoDoVeiculo, quantidade);
-    veiculos.add(veiculo);
-    System.out.println("Veículo criado com sucesso!");
-}
-
-public static void listarVeiculo(List<Veiculo> veiculos) {
-    Veiculo.listarVeiculo(veiculos);
-}
-
-public static void lerVeiculo(List<Veiculo> veiculos) {
-    Scanner ent = new Scanner(System.in);
-    System.out.println("Digite a marca do veículo: ");
-    String marca = ent.nextLine();
-    System.out.println("Digite o modelo do veículo: ");
-    String modelo = ent.nextLine();
-
-    for (Veiculo veiculo : veiculos) {
-        if (veiculo.getMarca().equals(marca) && veiculo.getModelo().equals(modelo)) {
-            veiculo.lerVeiculo();
-            return;
+                    Veiculo veiculoEstoque = buscarVeiculoEmArquivo(marca, modelo, nomeArquivo);
+                    if (veiculoEstoque != null) {
+                        veiculoEstoque.atualizarEstoqueEmArquivo(quantidadeAtualizacao, nomeArquivo);
+                    } else {
+                        System.out.println("Veículo não encontrado.");
+                    }
+                    break;
+                case 7:
+                    System.out.println("Saindo do programa.");
+                    scanner.close();
+                    System.exit(0);
+                default:
+                    System.out.println("Opção inválida. Por favor, escolha uma opção válida.");
+            }
         }
     }
-    System.out.println("Veículo não encontrado.");
-}
 
-public static void atualizarVeiculo(List<Veiculo> veiculos) {
-    Scanner ent = new Scanner(System.in);
-    System.out.println("Digite a marca do veículo que deseja atualizar: ");
-    String marca = ent.nextLine();
-    System.out.println("Digite o modelo do veículo que deseja atualizar: ");
-    String modelo = ent.nextLine();
-
-    for (Veiculo veiculo : veiculos) {
-        if (veiculo.getMarca().equals(marca) && veiculo.getModelo().equals(modelo)) {
-            System.out.println("Digite a nova marca do veículo: ");
-            marca = ent.nextLine();
-            System.out.println("Digite o novo modelo do veículo: ");
-            modelo = ent.nextLine();
-            System.out.println("Digite o novo ano de fabricação do veículo: ");
-            int anoFabricacao = ent.nextInt();
-            ent.nextLine(); // Consumir a quebra de linha
-            System.out.println("Digite a nova cor do veículo: ");
-            String cor = ent.nextLine();
-            System.out.println("Digite o novo estado do veículo: ");
-            String estadoDoVeiculo = ent.nextLine();
-            System.out.println("Digite a nova quantidade em estoque: ");
-            int quantidade = ent.nextInt();
-
-            veiculo.atualizarVeiculo(marca, modelo, anoFabricacao, cor, estadoDoVeiculo, quantidade);
-            System.out.println("Veículo atualizado com sucesso!");
-            return;
+    private static Veiculo buscarVeiculoEmArquivo(String marca, String modelo, String nomeArquivo) {
+        List<Veiculo> veiculos = Veiculo.lerVeiculosEmArquivo(nomeArquivo);
+        for (Veiculo veiculo : veiculos) {
+            if (veiculo.getMarca().equals(marca) && veiculo.getModelo().equals(modelo)) {
+                return veiculo;
+            }
         }
+        return null;
     }
-    System.out.println("Veículo não encontrado.");
+    
 }
 
-public static void excluirVeiculo(List<Veiculo> veiculos) {
-    Scanner ent = new Scanner(System.in);
-    System.out.println("Digite a marca do veículo que deseja excluir: ");
-    String marca = ent.nextLine();
-    System.out.println("Digite o modelo do veículo que deseja excluir: ");
-    String modelo = ent.nextLine();
+    
+	
+	    
 
-    Veiculo.excluirVeiculo(veiculos, marca, modelo);
-}
