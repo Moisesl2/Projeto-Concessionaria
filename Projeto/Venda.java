@@ -120,6 +120,12 @@ public class Venda{
         String marca = scanner.nextLine();
         System.out.println(" Modelo do Veiculo: ");
         String modelo = scanner.nextLine();
+        System.out.println(" Ano de fabricacao: ");
+        int anoDeFabricacao = scanner.nextInt();
+        System.out.println(" Cor do Veiculo: ");
+        String cor = scanner.nextLine();
+        System.out.println(" Estado do Veiculo: ");
+        String estadoDoVeiculo = scanner.nextLine();
         System.out.println(" quantidade de Veiculos: ");
         int quantidade = scanner.nextInt();
         scanner.nextLine();
@@ -136,7 +142,7 @@ public class Venda{
 
         Cliente clienteAdicionado = new Cliente(nomeCompleto, cpf, idade, endereco, email, renda);
         Vendedor vendedorAdicionado = new Vendedor(nomeCompleto2, cpf2, idade2, endereco2, email2, comissao, salario);
-        Veiculo veiculoAdicionado = new Veiculo(marca, modelo, quantidade);
+        Veiculo veiculoAdicionado = new Veiculo(marca, modelo, anoDeFabricacao, cor, estadoDoVeiculo, quantidade);
         Venda venda = new Venda(status, data, valor, veiculoAdicionado, clienteAdicionado, vendedorAdicionado);
 
         vendas.add(venda);
@@ -197,7 +203,7 @@ public class Venda{
         for (int i = 0; i < veiculos.size(); i++) {
             Veiculo veiculo = veiculos.get(i);
             if (!veiculo.isVendido()) {
-                System.out.println("O veiculo " + i + ". " + veiculo.getMarca() + veiculo.getModelo() + veiculo.getQuantidade());  
+                System.out.println("O veiculo " + i + ". " + veiculo.getMarca() + veiculo.getModelo() + veiculo.getAnoDeFabricacao() + veiculo.getCor() + veiculo.getEstadoDoVeiculo() + veiculo.getQuantidade());  
             }    
         }
 
@@ -274,7 +280,7 @@ public class Venda{
             if ("Pendente".equalsIgnoreCase(venda.status)) {
                 System.out.println(" DATA: " + venda.getData());
                 System.out.println(" CLIENTE: " + venda.getCliente().getNomeCompleto());
-                System.out.println(" VEICULO: " + venda.getVeiculo().getMarca() + " " + venda.getVeiculo().getModelo() + " " + venda.getVeiculo().getQuantidade());
+                System.out.println(" VEICULO: " + venda.getVeiculo().getMarca() + " " + venda.getVeiculo().getModelo() + " " + " " + venda.getVeiculo().getAnoDeFabricacao() + " " + venda.getVeiculo().getCor() + " " + venda.getVeiculo().getEstadoDoVeiculo() + " " + venda.getVeiculo().getQuantidade());
                 System.out.println("-------------------------");
             } 
         }
@@ -287,7 +293,7 @@ public class Venda{
             System.out.println(" DATA: " + venda.getData());
             System.out.println(" VALOR: " + venda.getValor());
             System.out.println(" CLIENTE: " + venda.getCliente().getNomeCompleto());
-            System.out.println(" VEICULO: " + venda.getVeiculo().getMarca() + " " + venda.getVeiculo().getModelo() + " " + venda.getVeiculo().getQuantidade());
+            System.out.println(" VEICULO: " + venda.getVeiculo().getMarca() + " " + venda.getVeiculo().getModelo() + " " + " " + venda.getVeiculo().getAnoDeFabricacao() + " " + venda.getVeiculo().getCor() + " " + venda.getVeiculo().getEstadoDoVeiculo() + " " + venda.getVeiculo().getQuantidade());
             System.out.println(" VENDEDOR: " + venda.getVendedor().getNomeCompleto());
             System.out.println("-------------------------"); 
         }
@@ -346,7 +352,7 @@ public class Venda{
             while((linha = bufferedrReader.readLine())!= null){
                 String[] dados = linha.split(";");
 
-                if (dados.length >= 14) {
+                if (dados.length >= 17) {
                     String nomeCompleto = dados[0].trim();
                     String cpf = dados[1].trim();
                     int idade =Integer.parseInt(dados[2].trim());
@@ -357,34 +363,40 @@ public class Venda{
                     double salario = Double.parseDouble(dados[7].trim());
                     String marca = dados[8].trim();
                     String modelo = dados[9].trim();
-                    int quant = Integer.parseInt(dados[10].trim());
-                    String status = dados[11].trim();
-                    LocalDate data = LocalDate.parse(dados[12].trim());
-                    double valor = Double.parseDouble(dados[13].trim());
+                    int anoDeFabricacao = Integer.parseInt(dados[10].trim());
+                    String cor = dados[11].trim();
+                    String estadoDoVeiculo = dados[12].trim();
+                    int quant = Integer.parseInt(dados[13].trim());
+                    String status = dados[14].trim();
+                    LocalDate data = LocalDate.parse(dados[15].trim());
+                    double valor = Double.parseDouble(dados[16].trim());
 
                     Cliente novoCliente = new Cliente(nomeCompleto, cpf, idade, endereco, email, renda);
                     Vendedor novoVendedor = new Vendedor(nomeCompleto, cpf, idade, endereco, email, comissao, salario);
-                    Veiculo novoVeiculo = new Veiculo(marca, modelo, quant);
+                    Veiculo novoVeiculo = new Veiculo(marca, modelo, anoDeFabricacao, cor, estadoDoVeiculo, quant);
                     Venda novaVenda = new Venda(status, data, valor, novoVeiculo, novoCliente, novoVendedor);
-                    System.out.println("Nome Completo: " + novoCliente.getNomeCompleto());
-                    System.out.println("CPF: " + novoCliente.getCpf());
-                    System.out.println("Idade: " + novoCliente.getIdade());
-                    System.out.println("Endereco: " + novoCliente.getEndereco());
-                    System.out.println("Email: " + novoCliente.getEmail());
-                    System.out.println("Renda: " + novoCliente.getRenda());
+                    System.out.println("Nome Completo do Cliente: " + novoCliente.getNomeCompleto());
+                    System.out.println("CPF do Cliente:: " + novoCliente.getCpf());
+                    System.out.println("Idade do Cliente:: " + novoCliente.getIdade());
+                    System.out.println("Endereco do Cliente:: " + novoCliente.getEndereco());
+                    System.out.println("Email do Cliente:: " + novoCliente.getEmail());
+                    System.out.println("Renda do Cliente:: " + novoCliente.getRenda());
 
                     //Vendedor 
-                    System.out.println("Nome Completo: " + novoVendedor.getNomeCompleto());
-                    System.out.println("CPF: " + novoVendedor.getCpf());
-                    System.out.println("Idade: " + novoVendedor.getIdade());
-                    System.out.println("Endereco: " + novoVendedor.getEndereco());
-                    System.out.println("Email: " + novoVendedor.getEmail());
-                    System.out.println("Comissao: " + novoVendedor.getComissao());
-                    System.out.println(" Salario: " + novoVendedor.getSalario());
+                    System.out.println("Nome Completo do Vendedor: " + novoVendedor.getNomeCompleto());
+                    System.out.println("CPF do Vendedor: " + novoVendedor.getCpf());
+                    System.out.println("Idade do Vendedor: " + novoVendedor.getIdade());
+                    System.out.println("Endereco do Vendedor: " + novoVendedor.getEndereco());
+                    System.out.println("Email do Vendedor: " + novoVendedor.getEmail());
+                    System.out.println("Comissao do Vendedor: " + novoVendedor.getComissao());
+                    System.out.println(" Salario do Vendedor: " + novoVendedor.getSalario());
 
                     //veiculo
                     System.out.println(" Marca: " + novoVeiculo.getMarca());
                     System.out.println(" Modelo: " + novoVeiculo.getModelo());
+                    System.out.println(" Ano de Fabricação: " + novoVeiculo.getAnoDeFabricacao());
+                    System.out.println(" Cor do Veiculo" + novoVeiculo.getCor());
+                    System.out.println(" Estado do Veiculo: " + novoVeiculo.getEstadoDoVeiculo());
                     System.out.println(" Quantidade de veiculos: " + novoVeiculo.getQuantidade());
 
                     //Venda
