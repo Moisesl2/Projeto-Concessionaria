@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -170,14 +175,70 @@ public class Cliente extends Pessoa{
         System.out.println("Veiculo " + veiculo.getMarca() + veiculo.getModelo());
     }
 
+     public static void salvarDados(String nomeArquivo){
+        try {
+            FileWriter fileWriter = new FileWriter(nomeArquivo);
+            PrintWriter prinWriter = new PrintWriter(fileWriter);
+
+            for (Cliente cliente : clientes) {
+                prinWriter.println(" Nome Completo: " + cliente.getNomeCompleto() + "\nCPF: " + cliente.getCpf() + "\nIdade: " + cliente.getIdade() + "\nEndereco: " + cliente.getEndereco() + "\nEmail: " + cliente.getEmail() + "\nRenda:" + cliente.renda);
+            }
+            prinWriter.close();
+
+        } catch (IOException e) {
+            System.out.println(" Ocorreu um Erro no Arquivo..." + nomeArquivo + "\n");
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void lerDados(String nomeArquivo){
+        try {
+            FileReader fileReader = new FileReader(nomeArquivo);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            
+
+            String linha;
+
+            while ((linha = bufferedReader.readLine()) != null) {
+               String[] dados = linha.split(";"); 
+
+               if (dados.length >= 6) {
+                   String nomeCompleto = dados[0].trim();
+                   String cpf = dados[1].trim();
+                   int idade = Integer.parseInt(dados[2].trim());
+                   String endereco = dados[3].trim();
+                   String email = dados[4].trim();
+                   double renda = Double.parseDouble(dados[5].trim());
+
+                   Cliente novoCliente = new Cliente(nomeCompleto, cpf, idade, endereco, email, renda);
+
+                   System.out.println("Nome Completo: " + novoCliente.getNomeCompleto());
+                   System.out.println("CPF: " + novoCliente.getCpf());
+                   System.out.println("Idade: " + novoCliente.getIdade());
+                   System.out.println("Endereco: " + novoCliente.getEndereco());
+                   System.out.println("Email: " + novoCliente.getEmail());
+                   System.out.println("Renda: " + novoCliente.getRenda());
+                   System.out.println();
+                   clientes.add(novoCliente);
+                }
+            }
+            bufferedReader.close();
+
+
+        } catch (IOException e) {
+            System.out.println(" Ocorreu um erro ao carregar os dados!" + nomeArquivo + "\n" );
+            e.printStackTrace();
+        } catch (NumberFormatException e){
+            System.out.println(" Erro na conversao dos valores numericos! ");
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public String toString() {
         return "O Cliente " + super.toString() + " Renda: " + renda;
     }
 
-
-    
-
-    //Pricisei criar uma classe veiculo provisoria para que eu pudesse fazer o metodo de solicitar veiculo, e adicionei um novo metodo no diagrama
 
 }

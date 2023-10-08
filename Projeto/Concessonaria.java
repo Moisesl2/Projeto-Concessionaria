@@ -10,7 +10,7 @@ public class Concessonaria {
             System.out.println(" \n------ MENU PRINCIPAL ------ ");
             System.out.println("1. MENU DO CLIENTE ");
             System.out.println("2. MENU DAS VENDAS ");
-            System.out.println(" Sair");
+            System.out.println("3. Sair ");
             opcao = ent.nextInt();
 
             switch (opcao) {
@@ -24,6 +24,7 @@ public class Concessonaria {
 
                 case 3:
                     System.out.println("Saindo...");
+                    break;
 
                 default:
                     System.out.println(" Opção invalida!");
@@ -135,10 +136,10 @@ public class Concessonaria {
 
             switch (op2) {
                 case 1 :
-                    Venda.criarVenda(vendas, venda);
+                    Venda.criarVenda();
                     break;
                 case 2 :
-                    Venda.lerVenda(veiculos, clientes, vendedores);
+                    Venda.lerVenda();
                     break;
 
                 case 3 :
