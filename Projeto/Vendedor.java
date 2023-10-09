@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
 public class Vendedor extends Pessoa {
     private double salario;
     private double comissao;
@@ -82,10 +83,18 @@ public class Vendedor extends Pessoa {
         System.out.println("Vendedor não encontrado¹");
     }
     
-    public static double calcularSalario(double salario, double comissao) {
-        return salario +(salario * ( comissao / 100));
+    public static void calcularSalario(String cpf, double comissao) {
+        for (Vendedor vendedor : vendedor) {
+            if (vendedor.getCpf().equals(cpf)) {
+                double salarioComComissao = vendedor.getSalario() + (vendedor.getSalario() * (comissao / 100));
+                System.out.println("O salário com comissão do vendedor " + vendedor.getNomeCompleto() + " é: " + salarioComComissao);
+                return; // Sai do loop quando o vendedor é encontrado
+            }
+        }
+        System.out.println("Vendedor não encontrado.");
     }
-
+    
+    
 
      public static void salvarDados(String nomeArquivo){ 
         try {

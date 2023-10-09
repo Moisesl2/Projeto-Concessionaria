@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 public class Veiculo {
-	private String marca;
+    private String marca;
     private String modelo;
     private int anoDeFabricacao;
     private String cor;
@@ -20,6 +20,9 @@ public class Veiculo {
 
     // Métodos getters e setters 
     
+    public Veiculo(String marca2, String modelo2, int quantidade2) {
+    }
+
     public String getMarca() {
 		return marca;
 	}

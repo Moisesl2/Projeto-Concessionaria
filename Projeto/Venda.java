@@ -1,6 +1,14 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+// CASO APRESENTE ALGUM ERRO VERIFICAR O NOME DO ATRIBUTO "QUANTIDADE"
 
 public class Venda{
     private String status;
@@ -67,12 +75,85 @@ public class Venda{
         this.vendedor = vendedor;
     }
 
-    public static void criarVenda(List <Venda> vendas, Venda venda ){
+    private static List<Venda> vendas = new ArrayList<>();
+    private static List<Veiculo> veiculos = new ArrayList<>();
+    private static List<Vendedor> vendedores = new ArrayList<>();
+    private static List<Cliente> clientes = new ArrayList<>();
+
+
+    public static void criarVenda(){
+        Scanner scanner = new Scanner(System.in);
+ 
+        System.out.println(" Nome Completo do Cliente: ");
+        String nomeCompleto = scanner.nextLine();
+        System.out.println(" CPF do Cliente: ");
+        String cpf = scanner.nextLine();
+        System.out.println(" Idade do Cliente: ");
+        int idade = scanner.nextInt();
+        System.out.println(" Endereco do Cliente: ");
+        String endereco = scanner.nextLine();
+        System.out.println(" Email do Cliente: ");
+        String email = scanner.nextLine();
+        System.out.println(" Renda do Cliente: ");
+        double renda = scanner.nextDouble();
+        scanner.nextLine();
+
+        //Vendedor
+        System.out.println(" Nome do Vendedor: ");
+        String nomeCompleto2 = scanner.nextLine();
+        System.out.println(" CPF do Vendedor: ");
+        String cpf2 = scanner.nextLine();
+        System.out.println(" Idade do Vendedor: ");
+        int idade2 = scanner.nextInt();
+        System.out.println(" Endereco do Vendedor: ");
+        String endereco2 = scanner.nextLine();
+        System.out.println(" Email do Vendedor: ");
+        String email2 = scanner.nextLine();
+        System.out.println(" Comissão: ");
+        double comissao = scanner.nextDouble();
+        System.out.println(" Salario: ");
+        double salario = scanner.nextDouble();
+        scanner.nextLine();
+        
+        //veiculo
+        System.out.println(" Marca do Veiculo: ");
+        String marca = scanner.nextLine();
+        System.out.println(" Modelo do Veiculo: ");
+        String modelo = scanner.nextLine();
+        System.out.println(" Ano de fabricacao: ");
+        int anoDeFabricacao = scanner.nextInt();
+        System.out.println(" Cor do Veiculo: ");
+        String cor = scanner.nextLine();
+        System.out.println(" Estado do Veiculo: ");
+        String estadoDoVeiculo = scanner.nextLine();
+        System.out.println(" quantidade de Veiculos: ");
+        int quantidade = scanner.nextInt();
+        scanner.nextLine();
+ 
+        //Venda
+        System.out.println("Status da Venda: ");
+        String status = scanner.nextLine();
+        System.out.println(" Data da Venda (AAAA-MM-DD): ");
+        String stringData = scanner.nextLine();
+        LocalDate data = LocalDate.parse(stringData);
+        System.out.println(" Valor da Venda: ");
+        double valor = scanner.nextDouble();
+        scanner.nextLine();
+
+        Cliente clienteAdicionado = new Cliente(nomeCompleto, cpf, idade, endereco, email, renda);
+        Vendedor vendedorAdicionado = new Vendedor(nomeCompleto2, cpf2, idade2, endereco2, email2, comissao);
+        Veiculo veiculoAdicionado = new Veiculo(marca, modelo, anoDeFabricacao, cor, estadoDoVeiculo, quantidade);
+        Venda venda = new Venda(status, data, valor, veiculoAdicionado, clienteAdicionado, vendedorAdicionado);
+
         vendas.add(venda);
+        System.out.println(" Venda cadastrada com sucesso! ");
+        // scanner.close();
+        
     }
 
     public static Venda consultarVenda(List <Venda> vendas, LocalDate data){
         for (Venda venda : vendas) {
+            System.out.println(" Venda encontrada: ");
             if (venda.getData().equals(data)){
                 return venda;
             }
@@ -98,21 +179,23 @@ public class Venda{
         Venda vendaExistente = consultarVenda(vendas, data);
         if (vendaExistente != null) {
             vendas.remove(vendaExistente);
+            System.out.println(" Venda Deletada do  Sistema! ");
             return true;
         }
+        System.out.println(" Venda nao encontrada! ");
         return false;
     }
 
     //Ler vendas
-    public static Venda lerVenda(List <Veiculo> veiculos, List <Cliente> clientes, List <Vendedor> vendedores){
+    public static Venda lerVenda(){
         Scanner ent = new Scanner(System.in);
 
         System.out.print("Status da Venda: ");
         String status = ent.nextLine();
-        System.out.print("Data da Venda (DD-MM-AAAA): ");
+        System.out.print("Data da Venda (AAAA-MM-DD): ");
         String stringData = ent.nextLine();
         LocalDate data = LocalDate.parse(stringData);
-        System.out.println("Valor da Venda");
+        System.out.println("Valor da Venda: ");
         double valor = ent.nextDouble();
 
         //listar os veiculos disponiveis
@@ -120,7 +203,7 @@ public class Venda{
         for (int i = 0; i < veiculos.size(); i++) {
             Veiculo veiculo = veiculos.get(i);
             if (!veiculo.isVendido()) {
-                System.out.println("O veiculo " + i + ". " + veiculo.getMarca() + veiculo.getModelo());  
+                System.out.println("O veiculo " + i + ". " + veiculo.getMarca() + veiculo.getModelo() + veiculo.getAnoDeFabricacao() + veiculo.getCor() + veiculo.getEstadoDoVeiculo() + veiculo.getQuantidade());  
             }    
         }
 
@@ -154,7 +237,7 @@ public class Venda{
         ent.nextLine();
         Vendedor vendedorEscolhido = vendedores.get(vendedorIndex);
 
-        ent.close();
+        // ent.close();
 
         return new Venda(status, data, valor, veiculoSelecionado, clienteEscolhido, vendedorEscolhido);
     }
@@ -164,7 +247,7 @@ public class Venda{
         Scanner ent = new Scanner(System.in);
 
         System.out.println("Solicitacao de Veiculo: ");
-        System.out.print("Data da Solicitacao (DD-MM-AAAA): ");
+        System.out.print("Data da Solicitacao (AAAA-MM-DD): ");
         String dataString = ent.nextLine();
         LocalDate data = LocalDate.parse(dataString);
 
@@ -173,7 +256,7 @@ public class Venda{
         for (int i = 0; i < veiculos.size(); i++) {
             Veiculo veiculo = veiculos.get(i);
             if (!veiculo.isVendido()) {
-                System.out.println("O veiculo: " + i + ". " + veiculo.getMarca() + veiculo.getModelo());
+                System.out.println("O veiculo: " + i + ". " + veiculo.getMarca() + veiculo.getModelo() + veiculo.getQuantidade());
             }
         }
 
@@ -185,17 +268,10 @@ public class Venda{
         System.out.println("Solicitacao Criada!!");
         String status = "Pendente";
 
-        ent.close();
+        // ent.close();
 
         return new Venda(status, data, 0, veiculoSelecionado, cliente, vendedor);
     }
-
-    //Falar com o grupo antes de adicionar esse Metodo:
-    /*  public void calcularValorVenda(){
-        double precoVeiculo = veiculo.getPreco();
-        valor = precoVeiculo;
-        System.out.println("Valor o valor da venda foi de R$" + valor);
-    }*/
 
     //Listar Solicitação Pendente
     public static void listarSolicitacoesPententes(List <Venda> vendas){
@@ -204,7 +280,7 @@ public class Venda{
             if ("Pendente".equalsIgnoreCase(venda.status)) {
                 System.out.println(" DATA: " + venda.getData());
                 System.out.println(" CLIENTE: " + venda.getCliente().getNomeCompleto());
-                System.out.println(" VEICULO: " + venda.getVeiculo().getMarca() + " " + venda.getVeiculo().getModelo());
+                System.out.println(" VEICULO: " + venda.getVeiculo().getMarca() + " " + venda.getVeiculo().getModelo() + " " + " " + venda.getVeiculo().getAnoDeFabricacao() + " " + venda.getVeiculo().getCor() + " " + venda.getVeiculo().getEstadoDoVeiculo() + " " + venda.getVeiculo().getQuantidade());
                 System.out.println("-------------------------");
             } 
         }
@@ -217,7 +293,7 @@ public class Venda{
             System.out.println(" DATA: " + venda.getData());
             System.out.println(" VALOR: " + venda.getValor());
             System.out.println(" CLIENTE: " + venda.getCliente().getNomeCompleto());
-            System.out.println(" VEICULO: " + venda.getVeiculo().getMarca() + " " + venda.getVeiculo().getModelo());
+            System.out.println(" VEICULO: " + venda.getVeiculo().getMarca() + " " + venda.getVeiculo().getModelo() + " " + " " + venda.getVeiculo().getAnoDeFabricacao() + " " + venda.getVeiculo().getCor() + " " + venda.getVeiculo().getEstadoDoVeiculo() + " " + venda.getVeiculo().getQuantidade());
             System.out.println(" VENDEDOR: " + venda.getVendedor().getNomeCompleto());
             System.out.println("-------------------------"); 
         }
@@ -246,6 +322,105 @@ public class Venda{
             System.out.println(" A solicitacao nao esta pendente ou nao existe!");
         }
 
-        ent.close();
+        // ent.close();
     }
+
+    public static void salvarDados(String nomeArquivo){
+        try {
+            FileWriter fileWriter = new FileWriter(nomeArquivo);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+
+            for (Venda venda : vendas) {
+                printWriter.println(" Status da Venda: " + venda.getStatus() + " Data da Venda: " + venda.getData() + " Valor da Venda: " + venda.getValor() + " Veiculo: " + venda.getVeiculo() + " Vendedor: " + venda.getVendedor() + " Cliente: " + venda.getCliente());
+                
+            }
+            printWriter.close();
+
+        } catch (Exception e) {
+            System.out.println(" Ocorreu um Erro no Arquivo..." + nomeArquivo + "\n");
+            e.printStackTrace();
+        }
+    }
+
+    public static void lerDados(String nomeArquivo){
+        try {
+            FileReader fileReader = new FileReader(nomeArquivo);
+            BufferedReader bufferedrReader = new BufferedReader(fileReader);
+
+            String linha;
+
+            while((linha = bufferedrReader.readLine())!= null){
+                String[] dados = linha.split(";");
+
+                if (dados.length >= 17) {
+                    String nomeCompleto = dados[0].trim();
+                    String cpf = dados[1].trim();
+                    int idade =Integer.parseInt(dados[2].trim());
+                    String endereco = dados[3].trim();
+                    String email = dados[4].trim();
+                    double renda = Double.parseDouble(dados[5].trim());
+                    double comissao = Double.parseDouble(dados[6].trim());
+                    double salario = Double.parseDouble(dados[7].trim());
+                    String marca = dados[8].trim();
+                    String modelo = dados[9].trim();
+                    int anoDeFabricacao = Integer.parseInt(dados[10].trim());
+                    String cor = dados[11].trim();
+                    String estadoDoVeiculo = dados[12].trim();
+                    int quant = Integer.parseInt(dados[13].trim());
+                    String status = dados[14].trim();
+                    LocalDate data = LocalDate.parse(dados[15].trim());
+                    double valor = Double.parseDouble(dados[16].trim());
+
+                    Cliente novoCliente = new Cliente(nomeCompleto, cpf, idade, endereco, email, renda);
+                    Vendedor novoVendedor = new Vendedor(nomeCompleto, cpf, idade, endereco, email, comissao);
+                    Veiculo novoVeiculo = new Veiculo(marca, modelo, anoDeFabricacao, cor, estadoDoVeiculo, quant);
+                    Venda novaVenda = new Venda(status, data, valor, novoVeiculo, novoCliente, novoVendedor);
+                    System.out.println("Nome Completo do Cliente: " + novoCliente.getNomeCompleto());
+                    System.out.println("CPF do Cliente:: " + novoCliente.getCpf());
+                    System.out.println("Idade do Cliente:: " + novoCliente.getIdade());
+                    System.out.println("Endereco do Cliente:: " + novoCliente.getEndereco());
+                    System.out.println("Email do Cliente:: " + novoCliente.getEmail());
+                    System.out.println("Renda do Cliente:: " + novoCliente.getRenda());
+
+                    //Vendedor 
+                    System.out.println("Nome Completo do Vendedor: " + novoVendedor.getNomeCompleto());
+                    System.out.println("CPF do Vendedor: " + novoVendedor.getCpf());
+                    System.out.println("Idade do Vendedor: " + novoVendedor.getIdade());
+                    System.out.println("Endereco do Vendedor: " + novoVendedor.getEndereco());
+                    System.out.println("Email do Vendedor: " + novoVendedor.getEmail());
+                    System.out.println("Comissao do Vendedor: " + novoVendedor.getComissao());
+                    System.out.println(" Salario do Vendedor: " + novoVendedor.getSalario());
+
+                    //veiculo
+                    System.out.println(" Marca: " + novoVeiculo.getMarca());
+                    System.out.println(" Modelo: " + novoVeiculo.getModelo());
+                    System.out.println(" Ano de Fabricação: " + novoVeiculo.getAnoDeFabricacao());
+                    System.out.println(" Cor do Veiculo" + novoVeiculo.getCor());
+                    System.out.println(" Estado do Veiculo: " + novoVeiculo.getEstadoDoVeiculo());
+                    System.out.println(" Quantidade de veiculos: " + novoVeiculo.getQuantidade());
+
+                    //Venda
+                    System.out.println(" Status da Venda: " + novaVenda.getStatus());
+                    System.out.println(" Data da Venda: " + novaVenda.getData());
+                    System.out.println(" Valor da Venda: " + novaVenda.getValor());
+                    vendas.add(novaVenda);
+                }
+            }
+            bufferedrReader.close();
+
+
+        } catch (IOException e) {
+            System.out.println(" Ocorreu um erro ao carregar os dados! " + nomeArquivo + "\n" );
+            e.printStackTrace();
+        } catch (NumberFormatException e){
+            System.out.println(" Erro na conversao dos valores numericos! ");
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Venda Status Da Venda: " + status + " Data da Venda: " + data + " Valor da Venda: " + valor + " Veiculo: " + veiculo + " Cliente: " + cliente + " Vendedor: " + vendedor ;
+    }
+
 }
