@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Principal {
 
-    ///// MENU DO CLIENTE
+    ///// MENU DO CLIENTE 
 
     public static void menuCliente(){
         Scanner ent2 = new Scanner(System.in);
