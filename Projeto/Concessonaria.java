@@ -110,6 +110,77 @@ public class Concessonaria {
        } while (op != 9);
     }
 
+    // --------NOVO METODO PARA SUBSTITUIR METODO MENU CLIENTE
+    public static void menuCliente2(){
+        Scanner ent2 = new Scanner(System.in);
+        int op;
+
+        while (true) {
+            System.out.println("\n-------- MENU DO CLIENTE --------");
+            System.out.println("1. Criar Cliente");
+            System.out.println("2. Listar Cliente");
+            System.out.println("3. Consultar Cliente");
+            System.out.println("4. Ler Cliente");
+            System.out.println("5. Atualizar Cliente");
+            System.out.println("6. Excluir Cliente");
+            System.out.println("7. Realizar um Pagamento");
+            System.out.println("8. Realizar a Solicitacao de um Veiculo");
+            System.out.println("9. Sair ");
+            op = ent2.nextInt();
+
+            switch (op) {
+                case 1:
+                Cliente.criarCliente();
+                break;
+
+            case 2:
+                Cliente.listarCliente();
+                break;
+
+            case 3:
+                Cliente.consultarCliente();
+                break;
+
+            case 4:
+                Cliente.lerCliente();
+                break;
+
+            case 5:
+                Cliente.atualizarCliente();
+                break;
+
+            case 6:
+                Cliente.excluirCliente();
+                break;
+
+            case 7:
+                Cliente cliente = null;
+
+                System.out.println(" Digite o valor do Pagamento");
+                double valorDoPagamento = ent2.nextDouble();
+                Cliente.realizarPagamento(cliente, valorDoPagamento);
+                break;
+
+            case 8:
+                Cliente client = null;
+                Veiculo veiculo = null;
+                Cliente.SolicitarVeiculo(client, veiculo);
+                break;
+            case 9:
+                System.out.println("Saindo...");
+                ent2.close();                
+                break;    
+
+            default:
+                System.out.println("Operacao invalida!");
+                break;
+            }
+            
+        }
+    }
+
+    ///--------ACABA AQUI---------
+
 
     public static void menuVenda(){
         List<Venda> vendas = new ArrayList<>();
